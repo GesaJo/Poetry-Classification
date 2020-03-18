@@ -7,7 +7,7 @@ from sklearn.metrics import f1_score
 
 
 def train_model(x, y, pred):
-    # Balance Dataset with SMOTE
+    # Balance Dataset with RandomOversampling
     sm = RandomOverSampler(sampling_strategy='minority')
     xsm, ysm = sm.fit_resample(x, y)
 

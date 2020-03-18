@@ -7,7 +7,7 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 
 # Set up Parser
 parser = argparse.ArgumentParser()
-parser.add_argument('-p', '--poet', type=str.lower, action='append')
+parser.add_argument('-p', '--poet', type=str.lower, action='append', help='type the names of two or more german poets')
 args = parser.parse_args()
 
 poets = args.poet
