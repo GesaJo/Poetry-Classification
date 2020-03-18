@@ -3,6 +3,10 @@ import spacy
 
 
 def clean_text_function(list_of_poets):
+    ''' cleaning the texts, replacing Umlaute,
+        tokenizing with spacy
+        and saving cleaned texts.'''
+        
     for poet in list_of_poets:
         f = open(f'Poems/{poet}.txt', 'r')
         poetx = f.read()
@@ -19,7 +23,7 @@ def clean_text_function(list_of_poets):
 
         clean_text = text_clean6.split(sep='!--!')
 
-        # Tokenization
+        # tokenize
         model = spacy.load('de_core_news_sm')
 
         clean_all = []
@@ -33,8 +37,8 @@ def clean_text_function(list_of_poets):
             clean_all.append(clean_poem)
         clean_all.pop(0)
 
+        # save
         with open(f"Poems/{poet}_cleaned.txt", "w") as output:
             output.write(str(clean_all))
-
 
         print(f'{poet.title()} has been added to the corpus.')

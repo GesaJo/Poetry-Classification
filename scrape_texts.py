@@ -3,7 +3,10 @@ from bs4 import BeautifulSoup
 
 
 def scrape_texts_function(list_of_poets):
-    ''' Get the links to all poems and write the texts into a file'''
+    ''' Get the links to all poems from the website and
+        write the texts into a file.
+        Input: list of poet-names,
+        output: saves poems on disk.'''
 
     # make a list of all links to the poems of the poet
     for poet in list_of_poets:
@@ -18,11 +21,12 @@ def scrape_texts_function(list_of_poets):
             if str(link_adress).endswith('.html'):
                 poems_list.append(link_adress)
 
+        # exception for poets with less than 5 poems on the website
         if len(poems_list) < 5:
             print(f'Sadly, there are not enough poems by {poet.title()} to make a prediction.')
             print('Please start again.')
             raise SystemExit(0)
-            
+
         # get the texts and append them to a list
         poem_text = []
         for poem in poems_list:

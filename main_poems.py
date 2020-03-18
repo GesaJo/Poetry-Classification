@@ -1,16 +1,21 @@
+''' Main file for the poetry-classification-program. '''
+
 import argparse
+from check_poets import check_poets_function
 from scrape_texts import scrape_texts_function
 from clean_poems import clean_text_function
 from joins_and_splits import agg_texts
 from lyrics_model import train_model
-from sklearn.feature_extraction.text import TfidfVectorizer
 
 # Set up Parser
 parser = argparse.ArgumentParser()
-parser.add_argument('-p', '--poet', type=str.lower, action='append', help='type the names of two or more german poets')
+parser.add_argument('-p', '--poet', type=str.lower, action='append', help='type the names of two or more german poets, umlaute replaced by: ae, oe, ue.')
 args = parser.parse_args()
 
 poets = args.poet
+
+# check if author exists on website
+check_poets_function(poets)
 
 # Scraping and preparing the texts
 print('Scraping...')
