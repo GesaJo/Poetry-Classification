@@ -1,9 +1,9 @@
 ''' Checking if poems by the author are on the website via a list of the
     names that has been created beforehand.'''
 
+import re
 import requests
 from bs4 import BeautifulSoup
-import re
 
 # generating the list of author-names
 poets_list = []
@@ -42,9 +42,9 @@ def check_poets_function(list_of_poets):
     with open("poets_list.txt", "r") as out:
         poets_av = out.read()
 
-        for poet_name in list_of_poets:
-            if poet_name not in poets_av:
-                print(f'Unfortunately, no poems by {poet_name} exist on the website.')
+        for poet_name_to_check in list_of_poets:
+            if poet_name_to_check not in poets_av:
+                print(f'Unfortunately, no poems by {poet_name_to_check} exist on the website.')
                 print('Please start again.')
                 raise SystemExit(0)
         print("Let's start!")

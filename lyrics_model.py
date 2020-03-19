@@ -1,7 +1,7 @@
 from sklearn.naive_bayes import MultinomialNB
 from sklearn.model_selection import GridSearchCV
-from imblearn.over_sampling import RandomOverSampler
 from sklearn.model_selection import cross_val_score
+from imblearn.over_sampling import RandomOverSampler
 
 
 def train_model(x, y, pred):

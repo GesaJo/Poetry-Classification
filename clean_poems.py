@@ -2,31 +2,35 @@ import re
 import spacy
 
 
-def clean_text_function(list_of_poets):
-    ''' cleaning the texts, replacing Umlaute,
-        tokenizing with spacy
+def clean_text_function(text):
+    ''' function to clean text:
+        replace Umlaute and delete noise'''
+
+    Patterns = [('ä', 'ae'), ('ö', 'oe'), ('ü', 'ue'), ('ß', 'ss'),
+                ('<.+?>', ' '), ('Aufnahme \d{4}', '!--!'), ('\\\xa0', '')]
+    for to_replace, insert in Patterns:
+        text = re.sub(to_replace, insert, text)
+
+    return text
+
+
+def tokenize_function(list_of_poets):
+    ''' tokenizing with spacy
         and saving cleaned texts.'''
-        
+
     for poet in list_of_poets:
         f = open(f'Poems/{poet}.txt', 'r')
         poetx = f.read()
         f.close()
 
         # clean up text
-        text_clean = re.sub('<.+?>', ' ', poetx)
-        text_clean1 = re.sub('Aufnahme \d{4}', '!--!', text_clean)
-        text_clean2 = re.sub('\\\xa0', '', str(text_clean1))
-        text_clean3 = re.sub('ä', 'ae', text_clean2)
-        text_clean4 = re.sub('ö', 'oe', text_clean3)
-        text_clean5 = re.sub('ü', 'ue', text_clean4)
-        text_clean6 = re.sub('ß', 'ss', text_clean5)
-
-        clean_text = text_clean6.split(sep='!--!')
+        clean_text = clean_text_function(poetx)
+        clean_text = clean_text.split(sep='!--!')
 
         # tokenize
         model = spacy.load('de_core_news_sm')
 
-        clean_all = []
+        tokenized = []
         for poem in clean_text:
             clean_poem = []
             tokenized_poem = model(poem)
@@ -34,11 +38,15 @@ def clean_text_function(list_of_poets):
                 if not token.is_stop:
                     if token.is_alpha:
                         clean_poem.append(token.lemma_)
-            clean_all.append(clean_poem)
-        clean_all.pop(0)
+            tokenized.append(clean_poem)
+        tokenized.pop(0)
+        return_poet = poet
+    return return_poet, tokenized
 
-        # save
-        with open(f"Poems/{poet}_cleaned.txt", "w") as output:
-            output.write(str(clean_all))
 
-        print(f'{poet.title()} has been added to the corpus.')
+def save_cleaned_text(poet_name, tokenized_text):
+
+    with open(f"Poems/{poet_name}_cleaned.txt", "w") as output:
+        output.write(str(tokenized_text))
+
+    print(f'{poet_name.title()} has been added to the corpus.')

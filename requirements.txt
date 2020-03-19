@@ -1,0 +1,7 @@
+requests
+BeautifulSoup
+spacy
+sklearn
+pandas
+numpy
+imblearn
