@@ -40,13 +40,8 @@ def tokenize_function(list_of_poets):
                         clean_poem.append(token.lemma_)
             tokenized.append(clean_poem)
         tokenized.pop(0)
-        return_poet = poet
-    return return_poet, tokenized
 
+        with open(f"Poems/{poet}_cleaned.txt", "w") as output:
+            output.write(str(tokenized))
 
-def save_cleaned_text(poet_name, tokenized_text):
-
-    with open(f"Poems/{poet_name}_cleaned.txt", "w") as output:
-        output.write(str(tokenized_text))
-
-    print(f'{poet_name.title()} has been added to the corpus.')
+            print(f'{poet.title()} has been added to the corpus.')

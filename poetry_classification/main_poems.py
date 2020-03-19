@@ -3,7 +3,7 @@
 import argparse
 from check_poets import check_poets_function
 from scrape_texts import scrape_texts_function
-from clean_poems import tokenize_function, save_cleaned_text
+from clean_poems import tokenize_function
 from joins_and_splits import agg_texts
 from lyrics_model import train_model
 
@@ -26,8 +26,8 @@ print('Done!\n')
 
 # Cleaning and tokenizing
 print('Texts are cleaned and tokenized')
-poet, tokenized = tokenize_function(poets)
-save_cleaned_text(poet, tokenized)
+tokenize_function(poets)
+
 
 print('Further preprocessing...')
 x_train, y_train, tfidf = agg_texts(poets)
