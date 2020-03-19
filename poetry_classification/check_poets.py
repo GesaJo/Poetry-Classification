@@ -47,4 +47,4 @@ def check_poets_function(list_of_poets):
                 print(f'Unfortunately, no poems by {poet_name_to_check} exist on the website.')
                 print('Please start again.')
                 raise SystemExit(0)
-        print("Let's start!")
+        

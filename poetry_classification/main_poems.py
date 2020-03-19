@@ -2,9 +2,9 @@
 
 import argparse
 from check_poets import check_poets_function
-from scrape_texts import scrape_texts_function
-from clean_poems import tokenize_function
-from joins_and_splits import agg_texts
+from scrape_clean import scrape_texts_function
+from tokenize_poems import tokenize_function
+from aggregation_vectorization import agg_texts
 from lyrics_model import train_model
 
 # Set up Parser
@@ -19,18 +19,19 @@ poets = args.poet
 # check if author exists on website
 check_poets_function(poets)
 
-# Scraping and preparing the texts
+# Scraping and cleaning of the texts
 print('Scraping...')
-scrape_texts_function(poets)
-print('Done!\n')
+d_poets = scrape_texts_function(poets)
+print('Done!\n\n')
 
-# Cleaning and tokenizing
-print('Texts are cleaned and tokenized')
-tokenize_function(poets)
+# tokenizing
+print('Texts are cleaned and tokenized...')
+d_tokenized = tokenize_function(d_poets)
+print('\n')
 
 
 print('Further preprocessing...')
-x_train, y_train, tfidf = agg_texts(poets)
+x_train, y_train, tfidf = agg_texts(d_tokenized)
 print('Done!\n\nNow please enter a line of a poem:')
 
 # input & vectorization

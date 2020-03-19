@@ -5,7 +5,7 @@ import pandas as pd
 import numpy as np
 
 
-def agg_texts(list_of_poets):
+def agg_texts(dict_tokenized):
     ''' Aggregates texts from given poets and
         creates y-values according to the authors.
         Vectorizes the poems and shapes them into suitable training-data.
@@ -15,18 +15,13 @@ def agg_texts(list_of_poets):
     texts_aggregated = []
     y_aggregated = []
 
-    for poet in list_of_poets:
-        file = open(f'Poems/{poet}_cleaned.txt', 'r')
-        x_str = file.read()
-        file.close()
-
-        # split string to make a list
-        x_words = x_str.split(sep='], [')
+    for poet in dict_tokenized:
 
         # add to texts_aggregated and create y-values
-        for text in x_words:
-            texts_aggregated.append(text)
-            y_aggregated.append(poet)
+        for text in dict_tokenized[poet]:
+            for subtext in text:
+                texts_aggregated.append(subtext)
+                y_aggregated.append(poet)
 
     # vectorize
     tfidf = TfidfVectorizer()
