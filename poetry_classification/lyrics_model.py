@@ -21,5 +21,5 @@ def train_model(x, y, pred):
     grid.fit(xsm, ysm)
     ypred = grid.predict(pred)[0]
 
-    print(cross_val_score(m, xsm, ysm).mean())
-    print(f'This poem is by {ypred.title()}!')
+    cross_val = round(cross_val_score(m, xsm, ysm).mean()*100)
+    print(f'\nWith a probability of {cross_val}% is this line by {ypred.title()}!')

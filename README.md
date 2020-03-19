@@ -13,7 +13,9 @@ The model used is a Naive Bayes model with random oversampling.
 - run the main-file in your command-line interface giving two or more authors as input: python main_poems.py -p author1 -p author2
 - follow the instructions in your command-line interface
 
-## Tests
-Two of the tests are still under construction (commented out).
+## To Do:
+- some more cleaning up (comments)
+- Find & add first names
+- improvements: different oversampling-method, maybe find a website with a bigger corpus
 
 ![alt text](https://images.unsplash.com/reserve/uZYSV4nuQeyq64azfVIn_15130980706_64134efc6e_o.jpg?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1947&q=80)
