@@ -23,3 +23,7 @@ def train_model(x, y, pred):
 
     cross_val = round(cross_val_score(m, xsm, ysm).mean()*100)
     print(f'\nWith a probability of {cross_val}% is this line by {ypred.title()}!')
+
+# to do:
+# different oversampling method?
+# check: without stop-words?
