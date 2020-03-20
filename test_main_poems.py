@@ -1,9 +1,9 @@
 ''' Tests for the poetry-classifier-program.'''
 import pytest
-from check_poets import check_poets_function
-from scrape_clean import scrape_texts_function, clean_text_function
-from tokenize_poems import tokenize_function
-from aggregation_vectorization import agg_texts
+from poetry_classification.check_poets import check_poets_function
+from poetry_classification.scrape_clean import scrape_texts_function, clean_text_function
+from poetry_classification.tokenize_poems import tokenize_function
+from poetry_classification.aggregation_vectorization import agg_texts
 
 
 # test check_poets
