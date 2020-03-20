@@ -1,2 +1,2 @@
 [pylint]
-   disable=C0103, C0301, C0116, E1136, W1401
+   disable=C0103, C0301, C0114, W1401, R0914, R1702

@@ -37,5 +37,6 @@ def test_tokenize_function():
 
 # test aggregating texts
 def test_agg_texts():
-    x, y, _ = agg_texts({'one': [['Mond Sonne']], 'two': [['Planet'], ['Schnuppe']]})
+    x, y, _ = agg_texts({'one': [['Mond Sonne']],
+                         'two': [['Planet'], ['Schnuppe']]})
     assert x.shape[0] == y.shape[0]
