@@ -1,11 +1,11 @@
 # Poetry-Classification
-
 [![Build Status](https://travis-ci.com/GesaJo/Poetry-Classification.svg?branch=master)](https://travis-ci.com/GesaJo/Poetry-Classification)
 
 ## Project to scrape poems and train a model to predict the author
-This program scrapes the website www.deutschelyrik.de for poems by two or more given german poets, cleans and vectorizes the texts and trains a model to predict who of these poets the author of any given line of text is.
-
+This program scrapes the website www.deutschelyrik.de for poems by two or more given german poets, cleans and vectorizes the texts and trains a model to predict who of these poets is most likely to be the author of any given line of text.
 The model used is a Naive Bayes model with random oversampling.
+
+This project has been developed in week 5 of the Spiced-Bootcamp.
 
 ## How to use it
 - Clone the repository: git clone https://github.com/GesaJo/Poetry-Classification.git
@@ -16,6 +16,6 @@ The model used is a Naive Bayes model with random oversampling.
 ## To Do:
 - some more cleaning up (comments)
 - Find & add first names
-- improvements: different oversampling-method, maybe find a website with a bigger corpus
+- improvements: different oversampling-method
 
 ![alt text](https://images.unsplash.com/reserve/uZYSV4nuQeyq64azfVIn_15130980706_64134efc6e_o.jpg?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1947&q=80)
