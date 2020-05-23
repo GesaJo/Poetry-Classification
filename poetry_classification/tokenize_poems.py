@@ -1,17 +1,11 @@
 import spacy
 
-
 def tokenize_function(dict_poets):
-    ''' tokenizing with spacy
-        and saving cleaned texts.'''
+    '''Tokenizing with spacy and saving cleaned texts.'''
 
     dict_tokenized = {}
-
     for poet in dict_poets:
-
-        # tokenize
         model = spacy.load('de_core_news_sm')
-
         tokenized = []
         for paragraph in dict_poets[poet]:
             for poem in paragraph:
@@ -23,9 +17,6 @@ def tokenize_function(dict_poets):
                             clean_poem.append(token.lemma_)
                 tokenized.append(clean_poem)
         tokenized.pop(0)
-
         dict_tokenized[poet] = tokenized
-
         print(f'{poet.title()} has been added to the corpus.')
-
     return dict_tokenized

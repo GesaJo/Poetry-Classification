@@ -1,17 +1,15 @@
 import re
 import requests
 from bs4 import BeautifulSoup
-
+from translate import translate_poems
 
 def clean_text_function(text):
-    ''' function to clean text:
-        replace Umlaute and delete noise'''
+    ''' function to clean text: replace Umlaute and delete noise'''
 
     Patterns = [('ä', 'ae'), ('ö', 'oe'), ('ü', 'ue'), ('ß', 'ss'),
-                ('<.+?>', ' '), ('Aufnahme \d{4}', '!--!'), ('\\\xa0', '')]
+                ('<.+?>', ' '), ('Aufnahme \d{4}', ''), ('\\\xa0', '')]
     for to_replace, insert in Patterns:
         text = re.sub(to_replace, insert, text)
-
     return text
 
 
@@ -27,18 +25,16 @@ def scrape_texts_function(list_of_poets):
     for poet in list_of_poets:
         get_poems = requests.get(f'https://www.deutschelyrik.de/{poet}.html')
         link_list = BeautifulSoup(get_poems.text, 'html.parser')
-
         poems_list = []
         for link in link_list.find_all(attrs={'class': 'mod_navigation block',
                                               'id': 'snav2'})[0].find_all('a'):
             link_adress = link.get('href')
-
             if str(link_adress).endswith('.html'):
                 poems_list.append(link_adress)
 
         # exception for poets with less than 5 poems on the website
         if len(poems_list) < 5:
-            print(f'Sadly, there are not enough poems by {poet.title()} to make a prediction.')
+            print(f'Sadly, there are not enough poems by {poet.title()} to make a valid prediction.')
             print('Please start again.')
             raise SystemExit(0)
 
@@ -63,7 +59,10 @@ def scrape_texts_function(list_of_poets):
                         one_poem_text.append(text_cleaned1)
 
             one_poet_text.append(one_poem_text)
-
+            print(one_poem_text)
+            one_poet_text.append(translate_poems(one_poem_text))
+            # print(one_poem_text)
+            # trans = translate_poems(one_poet_text)
+            print(one_poet_text)
         dict_poets[poet] = one_poet_text
-
     return dict_poets

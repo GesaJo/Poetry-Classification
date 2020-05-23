@@ -10,20 +10,16 @@ def agg_texts(dict_tokenized):
         creates y-values according to the authors.
         Vectorizes the poems and shapes them into suitable training-data.
         Input: list of poet-names,
-        output: x_train, y_train and the vectorizer.'''
+        output: x_train, y_train and the trained vectorizer.'''
 
     texts_aggregated = []
     y_aggregated = []
-
     for poet in dict_tokenized:
-
-        # add to texts_aggregated and create y-values
         for text in dict_tokenized[poet]:
             for subtext in text:
                 texts_aggregated.append(subtext)
                 y_aggregated.append(poet)
 
-    # vectorize
     tfidf = TfidfVectorizer()
     fitted = tfidf.fit_transform(texts_aggregated)
 

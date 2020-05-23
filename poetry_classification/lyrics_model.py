@@ -4,6 +4,7 @@ from sklearn.model_selection import cross_val_score
 from imblearn.over_sampling import RandomOverSampler
 
 
+
 def train_model(x, y, pred):
     ''' Uses random oversampling to counteract class imbalance,
         then trains a Naive Bayes model with

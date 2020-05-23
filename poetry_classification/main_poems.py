@@ -1,7 +1,8 @@
 ''' Main file for the poetry-classification-program. '''
 
 import argparse
-from check_poets import check_poets_function
+from os import path
+from check_poets import check_poets_function, poets_list
 from scrape_clean import scrape_texts_function
 from tokenize_poems import tokenize_function
 from aggregation_vectorization import agg_texts
@@ -10,29 +11,29 @@ from lyrics_model import train_model
 # Set up Parser
 parser = argparse.ArgumentParser()
 parser.add_argument('-p', '--poet', type=str.lower, action='append',
-                    help='type the names of two or more german poets,\
+                    help='Type the names of two or more german poets,\
                             umlaute replaced by: ae, oe, ue.')
 args = parser.parse_args()
-
 poets = args.poet
 
 # check if author exists on website
+if path.exists("poets_list.txt"):
+    pass
+else:
+    poets_list()
 check_poets_function(poets)
 
-# Scraping and cleaning of the texts
+# Scraping and cleaning of the texts, data augmentation
 print('Scraping...')
-d_poets = scrape_texts_function(poets)
-print('Done!\n\n')
+texts = scrape_texts_function(poets)
 
 # tokenizing
 print('Texts are cleaned and tokenized...')
-d_tokenized = tokenize_function(d_poets)
+d_tokenized = tokenize_function(texts)
 print('\n')
-
-
 print('Further preprocessing...')
 x_train, y_train, tfidf = agg_texts(d_tokenized)
-print('Done!\n\nNow please enter a line of a poem:')
+print('\nNow please enter a line of a poem:')
 
 # input & vectorization
 given_line = [input()]
