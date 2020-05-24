@@ -17,3 +17,4 @@ This project has been developed in week 5 of the Spiced-Bootcamp.
 - ~~some more cleaning up (comments)~~
 - ~~Find & add first names~~
 - work on translation-branch
+- more tests

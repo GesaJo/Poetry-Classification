@@ -13,15 +13,6 @@ def test_check_poets():
         assert check_poets_function(['kaléko', 'fried'])
 
 
-# test scraping
-def test_scrape_poets():
-    dict_poets = scrape_texts_function(['claudius', 'sachs'])
-    assert list(dict_poets.keys()) == ['claudius', 'sachs']
-
-    with pytest.raises(SystemExit):
-        assert scrape_texts_function(['eich', 'sachs'])
-
-
 # test cleaning
 def test_clean_text():
     cleaned = clean_text_function('Ähm öl über Straße <a> Aufnahme 2000 \xa0')
