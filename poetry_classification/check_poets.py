@@ -10,11 +10,9 @@ poets_list = []
 for name in ['auslaender', 'eich', 'hagelstange', 'lasker', 'platen']:
     get_poets = requests.get(f'https://www.deutschelyrik.de/{name}.html')
     poets_soup = BeautifulSoup(get_poets.text, 'html.parser')
-
     for poet in poets_soup.find_all(attrs={'class': 'level_2'})[0].find_all('a'):
         poet_name = poet.get('title')
         poets_list.append(poet_name)
-
     poets_list.append(name)
 
 # take out Kaléko due to rights-situation

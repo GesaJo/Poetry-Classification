@@ -10,7 +10,7 @@ from lyrics_model import train_model
 # Set up Parser
 parser = argparse.ArgumentParser()
 parser.add_argument('-p', '--poet', type=str.lower, action='append',
-                    help='type the names of two or more german poets,\
+                    help='Type the last names of two or more german poets,\
                             umlaute replaced by: ae, oe, ue.')
 args = parser.parse_args()
 
@@ -28,8 +28,6 @@ print('Done!\n\n')
 print('Texts are cleaned and tokenized...')
 d_tokenized = tokenize_function(d_poets)
 print('\n')
-
-
 print('Further preprocessing...')
 x_train, y_train, tfidf = agg_texts(d_tokenized)
 print('Done!\n\nNow please enter a line of a poem:')

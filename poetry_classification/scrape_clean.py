@@ -8,10 +8,9 @@ def clean_text_function(text):
         replace Umlaute and delete noise'''
 
     Patterns = [('ä', 'ae'), ('ö', 'oe'), ('ü', 'ue'), ('ß', 'ss'),
-                ('<.+?>', ' '), ('Aufnahme \d{4}', '!--!'), ('\\\xa0', '')]
+                ('<.+?>', ' '), ('\s*Aufnahme \d{4}', '!--!'), ('\\\xa0', '')]
     for to_replace, insert in Patterns:
         text = re.sub(to_replace, insert, text)
-
     return text
 
 
@@ -22,17 +21,16 @@ def scrape_texts_function(list_of_poets):
         output: saves poems on disk.'''
 
     dict_poets = {}
-
     # make a list of all links to the poems of the poet
     for poet in list_of_poets:
         get_poems = requests.get(f'https://www.deutschelyrik.de/{poet}.html')
         link_list = BeautifulSoup(get_poems.text, 'html.parser')
+        poet = link_list.find("h1").text
 
         poems_list = []
         for link in link_list.find_all(attrs={'class': 'mod_navigation block',
                                               'id': 'snav2'})[0].find_all('a'):
             link_adress = link.get('href')
-
             if str(link_adress).endswith('.html'):
                 poems_list.append(link_adress)
 
@@ -52,18 +50,30 @@ def scrape_texts_function(list_of_poets):
             try:
                 for k in range(len(poem_text_parsed.find_all(attrs={'class': 'ce_text last block'})[0].find_all('p'))):
                     one_p = (poem_text_parsed.find_all(attrs={'class': 'ce_text last block'})[0].find_all('p')[k])
-                    text_cleaned = clean_text_function(str(one_p))
-                    if len(text_cleaned) > 0:
-                        one_poem_text.append(text_cleaned)
+                    for line in one_p:
+                        if "Notwendige Anmerkung" in line:
+                            break
+                        else:
+                            text_cleaned = clean_text_function(str(line))
+                            if text_cleaned.isspace() == True:
+                                pass
+                            elif len(text_cleaned) > 0 or not text_cleaned.isspace() == True:
+                                one_poem_text.append(text_cleaned)
+
             except IndexError:
                 for j in range(len(poem_text_parsed.find_all(attrs={'class': 'ce_text block'})[0].find_all('p'))):
                     one_p1 = poem_text_parsed.find_all(attrs={'class': 'ce_text block'})[0].find_all('p')[j]
-                    text_cleaned1 = clean_text_function(str(one_p1))
-                    if len(text_cleaned1) > 0:
-                        one_poem_text.append(text_cleaned1)
+                    for line1 in one_p1:
+                        if "Notwendige Anmerkung" in line1:
+                            break
+                        else:
+                            text_cleaned1 = clean_text_function(str(line1))
+                            if text_cleaned1.isspace() == True:
+                                pass
+                            elif len(text_cleaned1) > 0:
+                                one_poem_text.append(text_cleaned1)
 
             one_poet_text.append(one_poem_text)
-
         dict_poets[poet] = one_poet_text
 
     return dict_poets

@@ -16,7 +16,6 @@ def agg_texts(dict_tokenized):
     y_aggregated = []
 
     for poet in dict_tokenized:
-
         # add to texts_aggregated and create y-values
         for text in dict_tokenized[poet]:
             for subtext in text:
