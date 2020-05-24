@@ -15,5 +15,5 @@ This project has been developed in week 5 of the Spiced-Bootcamp.
 
 ## To Do:
 <s>- some more cleaning up (comments)</s>
-<s>- Find & add first names</s>
 - work on translation-branch
+<s>- Find & add first names</s>

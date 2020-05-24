@@ -21,21 +21,21 @@ check_poets_function(poets)
 
 # Scraping and cleaning of the texts
 print('Scraping...')
-d_poets = scrape_texts_function(poets)
+dictionary_poets = scrape_texts_function(poets)
 print('Done!\n\n')
 
 # tokenizing
 print('Texts are cleaned and tokenized...')
-d_tokenized = tokenize_function(d_poets)
+dictionary_tokenized = tokenize_function(dictionary_poets)
 print('\n')
 print('Further preprocessing...')
-x_train, y_train, tfidf = agg_texts(d_tokenized)
+x_train, y_train, tfidf = agg_texts(dictionary_tokenized)
 print('Done!\n\nNow please enter a line of a poem:')
 
 # input & vectorization
 given_line = [input()]
-given_li = tfidf.transform(given_line)
-given = given_li.toarray()
+given_t = tfidf.transform(given_line)
+given = given_t.toarray()
 
 # train model and predict poet
 train_model(x_train, y_train, given)
