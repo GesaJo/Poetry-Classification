@@ -14,6 +14,6 @@ This project has been developed in week 5 of the Spiced-Bootcamp.
 - follow the instructions in your command-line interface
 
 ## To Do:
-<s>- some more cleaning up (comments)</s>
+- ~~some more cleaning up (comments)~~
+- ~~Find & add first names~~
 - work on translation-branch
-<s>- Find & add first names</s>

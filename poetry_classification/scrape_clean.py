@@ -46,7 +46,7 @@ def get_link_list(links_noisy):
 
     poems_list = []
     for link in links_noisy.find_all(attrs={'class': 'mod_navigation block',
-                                          'id': 'snav2'})[0].find_all('a'):
+                                            'id': 'snav2'})[0].find_all('a'):
         link_adress = link.get('href')
         if str(link_adress).endswith('.html'):
             poems_list.append(link_adress)
